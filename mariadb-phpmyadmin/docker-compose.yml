@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+
+  mariadb:
+    image: mariadb:10.4
+    container_name: mariadb
+    restart: always
+    network_mode: bridge
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mariadb.rule=Host(`mariadb.localhost`)
+      - traefik.http.routers.mariadb.entrypoints=web
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.9
+    container_name: phpmyadmin
+    restart: always
+    network_mode: bridge
+    depends_on: 
+      - mariadb
+    links:
+      - mariadb
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.localhost`)
+      - traefik.http.routers.phpmyadmin.entrypoints=web
+    volumes:
+      - /sessions
+    environment:
+      - PMA_HOST=mariadb
+        
+volumes:
+  mariadb_data:

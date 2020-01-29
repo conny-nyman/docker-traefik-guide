@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+
+  silverstripe-project-one:
+    image: brettt89/silverstripe-web:7.3-debian-buster
+    container_name: silverstripe-project-one
+    restart: always
+    network_mode: bridge
+    external_links:
+        - mariadb
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.silverstripe-project-one.rule=Host(`silverstripe-project-one.localhost`)
+      - traefik.http.routers.silverstripe-project-one.entrypoints=web
+    volumes:
+      - ./:/var/www/html
+  

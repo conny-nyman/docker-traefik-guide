@@ -1,16 +1,16 @@
 # docker-traefik-guide
 
-How to setup Docker with Traefik
+Example on how you can setup Docker with Traefik.
+
+With this setup you can have e.g. multiple php containers and share the same database container.
 
 # Project directory structure
 
 | Repositories | Docker |
 | ------ | ------ |
-| projects/traefik | docker-compose.yml |
-| projects/mysql | docker-compose.yml |
-| projects/phpmyadmin | docker-compose.yml |
-| projects/my-project-php-application-1 | docker-compose.yml |
-| projects/my-project-php-application-2 | docker-compose.yml |
+| projects/traefik | [docker-compose.yml](./traefik/docker-compose.yml) |
+| projects/mariadb-phpmyadmin | [docker-compose.yml](./mariadb-phpmyadmin/docker-compose.yml) |
+| projects/my-silverstripe-php-application-1 | [docker-compose.yml](./silverstripe-project-1/docker-compose.yml) |
 
 # Installation
 

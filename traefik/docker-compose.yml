@@ -1,0 +1,21 @@
+version: "3.5"
+
+services:
+
+  traefik-service:
+    image: traefik:v2.0.0-rc3
+    container_name: traefik-service
+    restart: always
+    network_mode: bridge
+    command:
+      #- --log.level=DEBUG
+      - --api.insecure=true
+      #- --api.dashboard=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
